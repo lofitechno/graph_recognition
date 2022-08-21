@@ -7,7 +7,6 @@ gray= cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
 template= cv2.imread('C:/aurorealis/420lab/imgs/room.jpg', 0)
 
-
 result= cv2.matchTemplate(gray, template, cv2.TM_SQDIFF)
 #cv2.normalize(result, result, 0, 1, cv2.NORM_MINMAX, -1 )
 

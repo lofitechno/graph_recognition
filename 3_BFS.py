@@ -1,5 +1,4 @@
-from collections import deque
-
+#Инициализация графа с рисунка из задания
 def init_graph():
     graph = {}
     graph[1] = [2, 5]
@@ -10,51 +9,24 @@ def init_graph():
     graph[6] = [4 ,5]
     return graph
 
+# реализация алгоритма поиска в ширину, но с возвращением искомого пути
 def search(graph, start, end):
-    search_queue = deque()
-    search_queue += graph[start]
-    searched = []
-    searched.append(start) #???
-    path = [] #???
-    while search_queue:
-        node  = search_queue.popleft()
-        if not node in searched:
-            if node == end:
-                print(searched)
-                #TODO: выделить поиск пути в отдульную функцию
-                path.append(end)
-                for i in searched[::-1]:
-                    if i in graph[path[-1]]:
-                        path.append(i)
-                #path.append(start)
-                print(path[::-1])
-                return True
-            else:
-                search_queue += graph[node]
-                searched.append(node)
-    return False
-
-def bfs(graph, start, end):
-    # maintain a queue of paths
+    # очередь путей
     queue = []
-    # push the first path into the queue
+    # первый путь в очередь
     queue.append([start])
     while queue:
-        # get the first path from the queue
+        # получаем первый путь из очереди
         path = queue.pop(0)
-        # get the last node from the path
+        # получаем крайний узел из пути
         node = path[-1]
-        # path found
+        # если путь найден
         if node == end:
             return path
-        # enumerate all adjacent nodes, construct a
-        # new path and push it into the queue
+        # перебираем соседние узлы, создаем новый путь и отправляем в очередь
         for adjacent in graph.get(node): #, []):
             new_path = list(path)
             new_path.append(adjacent)
             queue.append(new_path)
 
-
-print(search(init_graph(), 2 ,6))
-
-print(bfs(init_graph(), 3 ,6))
+print(search(init_graph(), 3 ,6))
